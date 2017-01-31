@@ -32,7 +32,6 @@ export function uploadSvg (file) {
 // 获取文件地址
 export function fetchFileAddr (type) {
     return new Promise((resolve, reject) => {
-        console.log('444');
         let reqAddr = 'http://104.131.78.218:3000/getFileAddr?type=' + type;
         let xhr = new XMLHttpRequest();
         xhr.open("GET", reqAddr);
@@ -79,4 +78,22 @@ export function downloadSvg (fileName) {
     //        console.log('fail');
     //      }
     // })
+}
+
+// 下载文件
+export function packSvg (type) {
+    return new Promise((resolve, reject) => {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://104.131.78.218:3000/pack?type=" + type);
+        xhr.onload = function (e) {
+           var res = JSON.parse(this.response);
+           if (this.status === 200) {
+               resolve(res.data);
+           }
+           else {
+               reject(res.msg); // 返回错误信息
+           }
+        }
+        xhr.send();
+    })
 }

@@ -18,6 +18,9 @@
           <a class="svg-btn__upload" v-on:click="submit">
               点击上传
           </a>
+          <a class="svg-btn__upload" v-on:click="pack">
+              打包下载
+          </a>
         </form>
       </ul>
     </div>
@@ -69,6 +72,7 @@ export default {
   methods: {
     ...mapActions({
         uploadSvg: 'UPLOAD',
+        packSvg: 'PACK',
         downloadSvg: 'DOWNLOAD',
         fetchSvgAddr: 'FETCH_FILE_ADDR'
     }),
@@ -79,6 +83,10 @@ export default {
         fileToUpload.append('picName', this.fileName);
         fileToUpload.append('fileType', type);
         this.uploadSvg({ type, fileToUpload });
+    },
+    pack () {
+        var type = this.type;
+        this.packSvg({ type });
     },
     showDownload (item) {
         let id = '#' + item.name;
@@ -244,4 +252,3 @@ export default {
     background-color: #ffa000;
 }
 </style>
-

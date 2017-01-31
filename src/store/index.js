@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { uploadSvg, downloadSvg, fetchFileAddr } from './api'
+import { uploadSvg, packSvg, downloadSvg, fetchFileAddr } from './api'
 
 Vue.use(Vuex)
 
@@ -25,6 +25,14 @@ const store = new Vuex.Store({
             commit('UPLOAD_FILE_FAIL', { err });
         })
     },
+    PACK: ({ commit }, { type }) => {
+        packSvg(type)
+        .then((data) => {
+            commit('PACK_SVG_SUCC', { data });
+        }, (err) => {
+            commit('PACK_SVG_FAIL', { err });
+        })
+    },
     // 下载文件（暂时不用-.-）
     DOWNLOAD: ({ commit }, { downloadFileName }) => {
         downloadSvg(downloadFileName);
@@ -38,7 +46,7 @@ const store = new Vuex.Store({
         })
     }
   },
-  // 同步操作放在 action
+  // 同步操作放在 mutations
   mutations: {
     // 上传文件失败
     UPLOAD_FILE_FAIL: (state, { err }) => {
@@ -57,6 +65,9 @@ const store = new Vuex.Store({
     // 获取文件地址
     FETCH_FILE_ADDR: (state, { type, addr }) => {
         state.listAddr[type] = addr;
+    },
+    PACK_SVG_SUCC: (state, { data }) => {
+        window.location = data.addr;
     }
   },
 
