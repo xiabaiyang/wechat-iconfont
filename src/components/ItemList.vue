@@ -9,8 +9,8 @@
           </div>
         </li>
         <form enctype="multipart/form-data" method="post" class="svg-form__upload" id="fileToUpload">
-          <a href="javascript:;" class="svg-input__file">选择文件
-              <input type="file" name="image" multiple>
+          <a href="javascript:;" class="svg-input__file">上传
+              <input type="file" name="image" multiple v-on:change="chooseFile()">
           </a>
           <a href="javascript:;" class="svg-input__text">
               <input type="text" name="picName" v-model="fileName" placeholder="请输入文件名">
@@ -18,8 +18,8 @@
           <a class="svg-btn__upload" v-on:click="submit">
               点击上传
           </a>
-          <a class="svg-btn__upload" v-on:click="pack">
-              打包下载
+          <a class="svg-btn__pack" v-on:click="pack">
+              下载
           </a>
         </form>
       </ul>
@@ -76,6 +76,10 @@ export default {
         downloadSvg: 'DOWNLOAD',
         fetchSvgAddr: 'FETCH_FILE_ADDR'
     }),
+    chooseFile () {
+        console.log('文件变动');
+        this.submit();
+    },
     submit () {
         // var type = this.$store.state.route.params.type;
         var type = this.type;
@@ -188,42 +192,42 @@ export default {
     display: block;
     position: absolute;
     top: -91px;
-    right: 33px;
+    right: 0;
     margin-top: 30px;
-    width: 100px;
+    width: 200px;
     height: 59px;
-    border: 1px solid gray;
     border-radius: 2px;
 }
 
 .svg-input__file {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
     display: inline-block;
-    width: 98px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
     vertical-align: middle;
-    line-height: 30px;
-    background: #D0EEFF;
-    border: 1px solid #99D3F5;
-    overflow: hidden;
-    color: #1E88C7;
+    border: 1px solid #ecd10a;
+    color: black;
+    font-size: 17px;
     text-decoration: none;
     text-indent: 0;
+    border-radius: 50%;
 }
 .svg-input__file input {
     position: absolute;
-    width: 100px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     font-size: 100px;
     left: 0;
     top: 0;
     opacity: 0;
 }
 .svg-input__file:hover {
-    background: #AADFFD;
-    border-color: #78C3F3;
-    color: #004974;
-    text-decoration: none;
+    cursor: pointer;
+    background-color: #ffa000;
 }
 
 .svg-input__text {
@@ -240,14 +244,36 @@ export default {
 
 .svg-btn__upload {
     display: block;
-    height: 27px;
-    line-height: 27px;
+    visibility: hidden;
+    height: 50px;
+    line-height: 50px;
     vertical-align: middle;
     font-size: 16px;
     font-weight: bold;
 }
 
 .svg-btn__upload:hover {
+    cursor: pointer;
+    background-color: #ffa000;
+}
+
+.svg-btn__pack {
+    position: absolute;
+    top: 50%;
+    left: 110px;
+    transform: translateY(-50%);
+    border: 1px solid #ecd10a;
+    display: block;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    font-size: 17px;
+    color: black;
+    line-height: 50px;
+    vertical-align: middle;
+}
+
+.svg-btn__pack:hover {
     cursor: pointer;
     background-color: #ffa000;
 }

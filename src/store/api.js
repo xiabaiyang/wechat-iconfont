@@ -15,6 +15,7 @@ export function uploadSvg (file) {
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "http://104.131.78.218:3000/file_upload");
+        // xhr.open("POST", "http://127.0.0.1:3000/file_upload");
         xhr.onload = function (e) {
             var res = JSON.parse(this.response);
             console.log(res);
@@ -33,6 +34,7 @@ export function uploadSvg (file) {
 export function fetchFileAddr (type) {
     return new Promise((resolve, reject) => {
         let reqAddr = 'http://104.131.78.218:3000/getFileAddr?type=' + type;
+        // let reqAddr = 'http://127.0.0.1:3000/getFileAddr?type=' + type;
         let xhr = new XMLHttpRequest();
         xhr.open("GET", reqAddr);
         xhr.onload = function (e) {
@@ -85,6 +87,7 @@ export function packSvg (type) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "http://104.131.78.218:3000/pack?type=" + type);
+        // xhr.open("GET", "http://127.0.0.1:3000/pack?type=" + type);
         xhr.onload = function (e) {
            var res = JSON.parse(this.response);
            if (this.status === 200) {
