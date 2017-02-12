@@ -106,7 +106,7 @@ export function getSvgDetail (path) {
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         // xhr.open("GET", "http://104.131.78.218:3000/getDetail?path=" + path);
-        xhr.open("GET", "http://127.0.0.1:3000/getDetail?path=" + path);
+        xhr.open("GET", "http://104.131.78.218:3000/getDetail?path=" + path);
         xhr.onload = function (e) {
            var res = JSON.parse(this.response);
            if (this.status === 200) {
