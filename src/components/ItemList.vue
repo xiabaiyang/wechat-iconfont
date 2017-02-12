@@ -37,10 +37,10 @@
               <label for="svgColor" class="color_label">SVG 颜色：</label>
               <input type="text" name="color" id="svgColor" class="color_input" placeholder="#000000"
                      v-model="svgColor" v-on:blur="inputColor">
-              <div class="svg__color svg__color_blue" v-on:click="changeColor('#10AEFF')"></div>
-              <div class="svg__color svg__color_orange" v-on:click="changeColor('#F2A049')"></div>
-              <div class="svg__color svg__color_red" v-on:click="changeColor('#F76260')"></div>
-              <div class="svg__color svg__color_green" v-on:click="changeColor('#09BB07')"></div>
+              <div class="svg__color svg__color_blue" v-on:click="presetColor('#10AEFF')"></div>
+              <div class="svg__color svg__color_orange" v-on:click="presetColor('#F2A049')"></div>
+              <div class="svg__color svg__color_red" v-on:click="presetColor('#F76260')"></div>
+              <div class="svg__color svg__color_green" v-on:click="presetColor('#09BB07')"></div>
           </div>
           <div class="svg__dialog_size">
               <label for="svgSize" class="size_label">SVG 大小：</label>
@@ -164,17 +164,22 @@ export default {
         dialogDownload.download = this.curSvgName + '.svg';
     },
     inputColor () {
-        var dialogSvg = document.getElementsByTagName('svg')[0];
-        dialogSvg.style.fill = this.svgColor;
+        this.changeColor(this.svgColor);
     },
     inputSize () {
         var dialogSvg = document.getElementsByTagName('svg')[0];
-        dialogSvg.style.width = this.svgSize;
-        dialogSvg.style.height = this.svgSize;
+        dialogSvg.setAttribute('width', this.svgSize);
+        dialogSvg.setAttribute('height', this.svgSize);
+    },
+    presetColor (color) {
+        this.changeColor(color);
+        this.svgColor = color;
     },
     changeColor (color) {
-        var dialogSvg = document.getElementsByTagName('svg')[0];
-        this.svgColor = dialogSvg.style.fill = color;
+        var dialogSvgs = document.getElementsByTagName('path');
+        for (var i = 0; i < dialogSvgs.length; i++) {
+            dialogSvgs[i].setAttribute('fill', color)
+        }
     }
   }
 }
@@ -365,7 +370,7 @@ export default {
 .svg__dialog {
     width: 500px;
     height: 400px;
-    position: absolute;
+    position: fixed;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);

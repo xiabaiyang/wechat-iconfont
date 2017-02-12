@@ -97,7 +97,9 @@ const store = new Vuex.Store({
 　　     objE.innerHTML = svgContent;
         svgDialogBody.appendChild(objE.childNodes[0]);
 
-        // jQuery('svg:last').addClass('dialog__svg');
+        var dialogSvg = document.getElementsByTagName('svg')[0];
+        dialogSvg.setAttribute('width', '200px');
+        dialogSvg.setAttribute('height', '200px');
 
         state.dialogShow = true;
     }
