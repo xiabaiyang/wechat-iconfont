@@ -4,7 +4,8 @@
         <li v-for="item in ItemList" class="svg-list">
           <div class="svg-list__wrapper" v-on:mouseover="showDownload(item)" v-on:mouseout="hideDownload(item)">
             <embed :src="item.addr" type="image/svg+xml" class="svg-list__item"/>
-            <a :href="item.addr" download class="svg-item__download" :id="item.name">下载</a>
+            <!-- <a :href="item.addr" download class="svg-item__download" :id="item.name">下载</a> -->
+            <a class="svg-item__download" :id="item.name" v-on:click="showDownloadDialog(item.name)">下载</a>
             <p class="svg-list__item_name">{{ item.name }}</p>
           </div>
         </li>
@@ -23,6 +24,31 @@
           </a>
         </form>
       </ul>
+      <div class="svg__mask" v-show="DialogShow === true">
+      </div>
+      <div class="svg__dialog" v-show="DialogShow === true">
+          <a href="javascript:;" class="svg__dialog_close" v-on:click="hideDownloadDialog">
+            X
+          </a>
+          <div class="svg__dialog_body">
+            <!-- <embed src="http://127.0.0.1:3000/files/mobile/想去.svg" type="image/svg+xml" class="svg-list__item"/> -->
+          </div>
+          <div class="svg__dialog_color">
+              <label for="svgColor" class="color_label">SVG 颜色：</label>
+              <input type="text" name="color" id="svgColor" class="color_input" placeholder="#000000"
+                     v-model="svgColor" v-on:blur="inputColor">
+              <div class="svg__color svg__color_blue" v-on:click="changeColor('#10AEFF')"></div>
+              <div class="svg__color svg__color_orange" v-on:click="changeColor('#F2A049')"></div>
+              <div class="svg__color svg__color_red" v-on:click="changeColor('#F76260')"></div>
+              <div class="svg__color svg__color_green" v-on:click="changeColor('#09BB07')"></div>
+          </div>
+          <div class="svg__dialog_size">
+              <label for="svgSize" class="size_label">SVG 大小：</label>
+              <input type="text" name="size" id="svgSize" class="size_input" placeholder="200px"
+                     v-model="svgSize" v-on:blur="inputSize">
+          </div>
+          <a href="#" class="svg__dialog_download" v-on:click="createSvgAndDownload">下载</a>
+      </div>
     </div>
 </template>
 
@@ -43,7 +69,10 @@ export default {
 
   data () {
       return {
-          fileName: ''
+          fileName: '',
+          svgColor: '',
+          svgSize: '',
+          curSvgName: ''
       };
   },
 
@@ -51,6 +80,12 @@ export default {
       ItemList: function (state) {
           let ItemList = state.listAddr[this.type];
           return ItemList;
+      },
+      DialogShow: function (state) {
+          return state.dialogShow;
+      },
+      SvgDetail: function (state) {
+          return state.svgDetail;
       }
   }),
 
@@ -74,7 +109,10 @@ export default {
         uploadSvg: 'UPLOAD',
         packSvg: 'PACK',
         downloadSvg: 'DOWNLOAD',
-        fetchSvgAddr: 'FETCH_FILE_ADDR'
+        fetchSvgAddr: 'FETCH_FILE_ADDR',
+        // showDialog: 'SHOW_DIALOG',
+        hideDialog: 'HIDE_DIALOG',
+        getSvgDetail: 'GET_SVG_DETAIL'
     }),
     chooseFile () {
         console.log('文件变动');
@@ -101,9 +139,44 @@ export default {
         jQuery(id).css('display', 'none');
     },
     download () {
+    },
+    showDownloadDialog (name) {
+        this.curSvgName = name; // 保存当前打开 dialog 的 svg name
+        var path = this.type + '/' + name + '.svg';
+        var svgDialogBody = document.getElementsByClassName('svg__dialog_body')[0];
+        this.getSvgDetail({ path, svgDialogBody });
+        // this.showDialog();
+    },
+    hideDownloadDialog () {
+        var curSvgDom = document.getElementsByTagName('svg')[0];
+        var svgDialogBody = document.getElementsByClassName('svg__dialog_body')[0];
+        svgDialogBody.removeChild(curSvgDom);
+        this.svgColor = '';
+        this.svgSize = '';
+        this.hideDialog();
+    },
+    createSvgAndDownload () {
+        var svgDetail = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'
+                        + document.getElementsByClassName('svg__dialog_body')[0].innerHTML;
+        var dialogDownload = document.getElementsByClassName('svg__dialog_download')[0];
+        var blob = new Blob([svgDetail], {type: 'image/svg+xml'});
+        dialogDownload.href = window.URL.createObjectURL(blob);
+        dialogDownload.download = this.curSvgName + '.svg';
+    },
+    inputColor () {
+        var dialogSvg = document.getElementsByTagName('svg')[0];
+        dialogSvg.style.fill = this.svgColor;
+    },
+    inputSize () {
+        var dialogSvg = document.getElementsByTagName('svg')[0];
+        dialogSvg.style.width = this.svgSize;
+        dialogSvg.style.height = this.svgSize;
+    },
+    changeColor (color) {
+        var dialogSvg = document.getElementsByTagName('svg')[0];
+        this.svgColor = dialogSvg.style.fill = color;
     }
   }
-
 }
 </script>
 
@@ -276,5 +349,131 @@ export default {
 .svg-btn__pack:hover {
     cursor: pointer;
     background-color: #ffa000;
+}
+
+.svg__mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    background: #0d0a31!important;
+    opacity: .85!important;
+}
+
+.svg__dialog {
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+    z-index: 9999;
+    background-color: #fafafb!important;
+    border-radius: 5px;
+}
+
+.svg__dialog_close {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.svg__dialog_body {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.svg__dialog_download {
+    position: absolute;
+    top: 290px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: #333;
+    font-size: 14px;
+    background-color: #ddd;
+    width: 60px;
+    text-align: center;
+}
+
+.svg__dialog_color {
+    display: inline-block;
+    width: 250px;
+    height: 20px;
+    position: absolute;
+    top: 230px;
+    left: 40px;
+}
+
+.color_label {
+    font-size: 14px;
+    color: black;
+}
+
+.color_input {
+    width: 60px;
+    height: 14px;
+}
+
+.svg__dialog_size {
+    display: inline-block;
+    width: 150px;
+    height: 20px;
+    position: absolute;
+    top: 230px;
+    right: 50px;
+}
+
+.size_label {
+    font-size: 14px;
+    color: black;
+}
+
+.size_input {
+    width: 60px;
+    height: 14px;
+}
+
+.dialog__svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.svg__color {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.svg__color_blue {
+    background-color: #10AEFF;
+}
+
+.svg__color_orange {
+    background-color: #F2A049;
+}
+
+.svg__color_red {
+    background-color: #F76260;
+}
+
+.svg__color_green {
+    background-color: #09BB07;
 }
 </style>

@@ -55,4 +55,8 @@ export default {
     font-weight: bold;
     color: #fff;
 }
+
+.router-nav__item:active {
+    color: orange;
+}
 </style>

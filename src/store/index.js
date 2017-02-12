@@ -1,18 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { uploadSvg, packSvg, downloadSvg, fetchFileAddr } from './api'
+import { uploadSvg, packSvg, downloadSvg, fetchFileAddr, getSvgDetail } from './api'
+import jQuery from 'jquery'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
       activeType: 'mobile', // 默认是 mobile
+      dialogShow: false,
       category: ['mobile', 'life', 'math'], // 类目
       listAddr: { // 图标地址
         mobile: [],
         life: [],
         game: []
-      }
+      },
+      svgDetail: '' // dialog 里的 svg 内容
   },
   // 异步操作放在 action
   actions: {
@@ -44,6 +47,18 @@ const store = new Vuex.Store({
             var addr = data.addr;
             commit('FETCH_FILE_ADDR', { type, addr });
         })
+    },
+    SHOW_DIALOG: ({ commit }) => {
+        commit('SHOW_DIALOG');
+    },
+    HIDE_DIALOG: ({ commit }) => {
+        commit('HIDE_DIALOG');
+    },
+    GET_SVG_DETAIL: ({ commit }, { path, svgDialogBody }) => {
+        getSvgDetail(path)
+        .then((data) => {
+            commit('GET_SVG_DETAIL', { data, svgDialogBody })
+        })
     }
   },
   // 同步操作放在 mutations
@@ -68,6 +83,23 @@ const store = new Vuex.Store({
     },
     PACK_SVG_SUCC: (state, { data }) => {
         window.location = data.addr;
+    },
+    // SHOW_DIALOG: (state) => {
+    //     state.dialogShow = true;
+    // },
+    HIDE_DIALOG: (state) => {
+        state.dialogShow = !state.dialogShow;
+    },
+    GET_SVG_DETAIL: (state, { data, svgDialogBody }) => {
+        state.svgDetail = data;
+        var svgContent = '<svg' + state.svgDetail.split('<svg')[1];
+        var objE = document.createElement("div");
+　　     objE.innerHTML = svgContent;
+        svgDialogBody.appendChild(objE.childNodes[0]);
+
+        // jQuery('svg:last').addClass('dialog__svg');
+
+        state.dialogShow = true;
     }
   },
 
