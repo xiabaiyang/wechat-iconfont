@@ -156,12 +156,21 @@ export default {
         this.hideDialog();
     },
     createSvgAndDownload () {
-        var svgDetail = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'
-                        + document.getElementsByClassName('svg__dialog_body')[0].innerHTML;
-        var dialogDownload = document.getElementsByClassName('svg__dialog_download')[0];
-        var blob = new Blob([svgDetail], {type: 'image/svg+xml'});
-        dialogDownload.href = window.URL.createObjectURL(blob);
-        dialogDownload.download = this.curSvgName + '.svg';
+//        var svgDetail = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'
+//                        + document.getElementsByClassName('svg__dialog_body')[0].innerHTML;
+//        var dialogDownload = document.getElementsByClassName('svg__dialog_download')[0];
+//        var blob = new Blob([svgDetail], {type: 'image/svg+xml'});
+//        dialogDownload.href = window.URL.createObjectURL(blob);
+//        dialogDownload.download = this.curSvgName + '.svg';
+
+        console.log(this.svgColor);
+        console.log(this.svgSize);
+        jQuery.post("http://127.0.0.1:3000/users/register", {
+                machineCode: '1234567qwerty',
+                sig: '8ca7600479617d39b8b77c00ae2561794ed4a06e12112393f3eed1796b529135c613f757b63453816fe07e1ecbe337ee61c3e45d483e94e8a663edeb5118c78167cc7f8e4fec405936ce9eb90a81d479081b1d9a6ff001d05e2fb8e4256d344ee7cb725ad77b0a733a87bd6974ff074e0aca3e6a61d92143ddd4f7d9bf02908f'
+            }, function(result){
+            console.log(result);
+        });
     },
     inputColor () {
         this.changeColor(this.svgColor);
