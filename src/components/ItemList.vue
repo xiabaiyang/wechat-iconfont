@@ -122,6 +122,7 @@ export default {
         // var type = this.$store.state.route.params.type;
         var type = this.type;
         var fileToUpload = new FormData(jQuery('#fileToUpload')[0]);
+        console.log('fileToUpload');
         fileToUpload.append('picName', this.fileName);
         fileToUpload.append('fileType', type);
         this.uploadSvg({ type, fileToUpload });
