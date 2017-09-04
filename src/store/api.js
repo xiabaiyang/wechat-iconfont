@@ -64,27 +64,26 @@ export function uploadSvg (file) {
     //    url: 'http://127.0.0.1:3000/users/batch_upload',
     //    traditional:true,
     //    data:{
-    //         sig: 'fed9a4cfd84605486dc79df5eedfa3e3',
+    //         sig: 'd4983d0c593e69825450011992d8c40a',
     //         list: JSON.stringify([{
-    //             name: 'gg.svg',
+    //             name: 'pp.svg',
     //             author: 'xby',
     //             content: '%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3Csvg%20width%3D%22202px%22%20height%3D%22255px%22%20viewBox%3D%220%200%20202%20255%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3C!--%20Generator%3A%20Sketch%2044.1%20(41455)%20-%20http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch%20--%3E%0A%20%20%20%20%3Ctitle%3ERectangle%3C%2Ftitle%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C%2Fdesc%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3Crect%20id%3D%22path-1%22%20x%3D%2274%22%20y%3D%2296%22%20width%3D%22202%22%20height%3D%22255%22%3E%3C%2Frect%3E%0A%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Artboard%22%20transform%3D%22translate(-74.000000%2C%20-96.000000)%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Rectangle%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cuse%20fill%3D%22%23D8D8D8%22%20fill-rule%3D%22evenodd%22%20xlink%3Ahref%3D%22%23path-1%22%3E%3C%2Fuse%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20stroke%3D%22%23979797%22%20stroke-width%3D%221%22%20x%3D%2274.5%22%20y%3D%2296.5%22%20width%3D%22201%22%20height%3D%22254%22%3E%3C%2Frect%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E',
-    //             projectId: 1,
+    //             projectId: 3,
     //             remarks: 'zzz'
     //         }
     //         , {
-    //             name: 'bb.svg',
+    //             name: 'oo.svg',
     //             author: 'xby',
     //             content: '%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3Csvg%20width%3D%22202px%22%20height%3D%22255px%22%20viewBox%3D%220%200%20202%20255%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3C!--%20Generator%3A%20Sketch%2044.1%20(41455)%20-%20http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch%20--%3E%0A%20%20%20%20%3Ctitle%3ERectangle%3C%2Ftitle%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C%2Fdesc%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3Crect%20id%3D%22path-1%22%20x%3D%2274%22%20y%3D%2296%22%20width%3D%22202%22%20height%3D%22255%22%3E%3C%2Frect%3E%0A%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Artboard%22%20transform%3D%22translate(-74.000000%2C%20-96.000000)%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Rectangle%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cuse%20fill%3D%22%23D8D8D8%22%20fill-rule%3D%22evenodd%22%20xlink%3Ahref%3D%22%23path-1%22%3E%3C%2Fuse%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20stroke%3D%22%23979797%22%20stroke-width%3D%221%22%20x%3D%2274.5%22%20y%3D%2296.5%22%20width%3D%22201%22%20height%3D%22254%22%3E%3C%2Frect%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E',
-    //             projectId: 1,
+    //             projectId: 3,
     //             remarks: 'zzz'
     //         },
     //         {
-    //             name: 'mm.svg',
+    //             name: 'uu.svg',
     //             author: 'xby',
     //             content: '%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3Csvg%20width%3D%22202px%22%20height%3D%22255px%22%20viewBox%3D%220%200%20202%20255%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3C!--%20Generator%3A%20Sketch%2044.1%20(41455)%20-%20http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch%20--%3E%0A%20%20%20%20%3Ctitle%3ERectangle%3C%2Ftitle%3E%0A%20%20%20%20%3Cdesc%3ECreated%20with%20Sketch.%3C%2Fdesc%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3Crect%20id%3D%22path-1%22%20x%3D%2274%22%20y%3D%2296%22%20width%3D%22202%22%20height%3D%22255%22%3E%3C%2Frect%3E%0A%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%3Cg%20id%3D%22Page-1%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Artboard%22%20transform%3D%22translate(-74.000000%2C%20-96.000000)%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cg%20id%3D%22Rectangle%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cuse%20fill%3D%22%23D8D8D8%22%20fill-rule%3D%22evenodd%22%20xlink%3Ahref%3D%22%23path-1%22%3E%3C%2Fuse%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20stroke%3D%22%23979797%22%20stroke-width%3D%221%22%20x%3D%2274.5%22%20y%3D%2296.5%22%20width%3D%22201%22%20height%3D%22254%22%3E%3C%2Frect%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E',
-    //             projectId: 1,
-    //             categoryId: 1,
+    //             projectId: 3,
     //             remarks: 'zzz'
     //         }
     //         ])
@@ -104,12 +103,22 @@ export function uploadSvg (file) {
     //        },
     //        dataType: "json",
     //        async: false
-    //     });
-
-    jQuery.get('http://123.207.94.56:3000/users/downloadZip', { sig: 'f391a02a9b9f430678201a3e22ab1366', remark: '测试下载 zip 压缩包', id: JSON.stringify([1197, 1199]) }, function (data) {
+    //     })20
+    jQuery.get('http://123.207.94.56:3000/users/createZip', { sig: 'f391a02a9b9f430678201a3e22ab1366', projectid: 20, remark: 'svg/png', id: JSON.stringify([1214]) }, function (data) {
         console.log(data);
-
     });
+
+    // jQuery.ajax({
+    //        type: "POST",
+    //        url: 'http://123.207.94.56:3000/users/deleteIcon',
+    //        traditional:true,
+    //        data:{
+    //             sig: 'fed9a4cfd84605486dc79df5eedfa3e3',
+    //             list: JSON.stringify([1211])
+    //        },
+    //        dataType: "json",
+    //        async: false
+    //     });
 
     // jQuery.ajax({
     //    type: "POST",
